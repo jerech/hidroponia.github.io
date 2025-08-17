@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa de Hidroponía Casera</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #3d7c47 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.1"/><circle cx="80" cy="30" r="1.5" fill="white" opacity="0.1"/><circle cx="40" cy="70" r="1" fill="white" opacity="0.1"/><circle cx="60" cy="10" r="1.2" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="1.8" fill="white" opacity="0.1"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        nav {
+            background: #1a3d0c;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #66bb6a, #4CAF50);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        main {
+            padding: 2rem;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: #2d5016;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: #3d7c47;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border-left-color: #28a745;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left-color: #ffc107;
+        }
+        
+        .sistema-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #4CAF50, #66bb6a);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 4rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+        
+        .presupuesto-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .presupuesto-table th {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .presupuesto-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .presupuesto-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .total-row {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .nutrient-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .nutrient-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid #4CAF50;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #66bb6a);
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .nav-grid { grid-template-columns: 1fr; }
+            main { padding: 1rem; }
+            .sistema-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌱 Hidroponía Casera</h1>
+            <p>Guía completa para cultivar hasta 30 plantas de lechuga y rúcula</p>
+        </header>
+        
+        <nav>
+            <div class="nav-grid">
+                <button class="nav-btn active" onclick="showSection('intro')">🏠 Introducción</button>
+                <button class="nav-btn" onclick="showSection('sistema')">⚙️ Sistema Casero</button>
+                <button class="nav-btn" onclick="showSection('nutrientes')">🧪 Nutrientes</button>
+                <button class="nav-btn" onclick="showSection('sustratos')">🌾 Sustratos</button>
+                <button class="nav-btn" onclick="showSection('proceso')">📋 Proceso Completo</button>
+                <button class="nav-btn" onclick="showSection('presupuesto')">💰 Presupuesto</button>
+                <button class="nav-btn" onclick="showSection('consejos')">💡 Consejos</button>
+            </div>
+        </nav>
+        
+        <main>
+            <!-- INTRODUCCIÓN -->
+            <section id="intro" class="section active">
+                <h2>¿Qué es la Hidroponía?</h2>
+                
+                <div class="card highlight">
+                    <h3>🌿 Definición</h3>
+                    <p>La hidroponía es una técnica de cultivo que permite hacer crecer plantas sin tierra, utilizando únicamente agua con nutrientes disueltos. Las raíces reciben todos los elementos necesarios directamente del agua.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>✅ Ventajas de la Hidroponía</h3>
+                    <ul>
+                        <li><strong>Mayor rendimiento:</strong> Las plantas crecen 30-50% más rápido</li>
+                        <li><strong>Menos espacio:</strong> Ideal para espacios reducidos</li>
+                        <li><strong>Ahorro de agua:</strong> Usa 90% menos agua que cultivo tradicional</li>
+                        <li><strong>Sin plagas del suelo:</strong> Menos problemas de insectos y enfermedades</li>
+                        <li><strong>Cosecha todo el año:</strong> No depende de estaciones</li>
+                        <li><strong>Productos más limpios:</strong> Sin tierra adherida</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>🥬 ¿Por qué Lechuga y Rúcula?</h3>
+                    <p>Son cultivos ideales para principiantes porque:</p>
+                    <ul>
+                        <li>Crecimiento rápido (25-40 días)</li>
+                        <li>Pocos requerimientos nutricionales</li>
+                        <li>Alta tolerancia a errores</li>
+                        <li>Excelente retorno de inversión</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- SISTEMA CASERO -->
+            <section id="sistema" class="section">
+                <h2>Sistema Hidropónico Casero NFT</h2>
+                
+                <div class="card highlight">
+                    <h3>🔧 Sistema NFT (Nutrient Film Technique)</h3>
+                    <p>Recomendamos el sistema NFT por su simplicidad y eficiencia. El agua con nutrientes fluye continuamente por canales inclinados donde están las plantas.</p>
+                </div>
+                
+                <div class="sistema-grid">
+                    <div class="card">
+                        <h3>📐 Componentes Principales</h3>
+                        <ul>
+                            <li><strong>Canales de cultivo:</strong> Tubos PVC de 110mm</li>
+                            <li><strong>Reservorio:</strong> Tanque de 100-150 litros</li>
+                            <li><strong>Bomba de agua:</strong> 600-800 L/h</li>
+                            <li><strong>Timer:</strong> Para automatizar riego</li>
+                            <li><strong>Tubería de retorno:</strong> PVC 40mm</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📏 Dimensiones Sugeridas</h3>
+                        <ul>
+                            <li><strong>3 canales</strong> de 3 metros cada uno</li>
+                            <li><strong>10 plantas</strong> por canal = 30 plantas total</li>
+                            <li><strong>Separación:</strong> 30cm entre plantas</li>
+                            <li><strong>Inclinación:</strong> 1-2% hacia retorno</li>
+                            <li><strong>Altura:</strong> 1-1.5 metros del suelo</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <h3>🔨 Pasos de Construcción</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4><span class="step-number">1</span>Preparar los Canales</h4>
+                            <p>Cortar tubos PVC de 110mm en 3 secciones de 3 metros. Hacer agujeros de 5cm de diámetro cada 30cm para las plantas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4><span class="step-number">2</span>Instalar Soporte</h4>
+                            <p>Construir estructura con caños de hierro o madera. Los canales deben tener 1-2% de inclinación.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4><span class="step-number">3</span>Conectar Sistema de Riego</h4>
+                            <p>Instalar bomba en reservorio, conectar tubería a inicio de canales y sistema de retorno al tanque.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4><span class="step-number">4</span>Automatización</h4>
+                            <p>Conectar timer para que la bomba funcione 15 minutos cada 2 horas durante el día.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- NUTRIENTES -->
+            <section id="nutrientes" class="section">
+                <h2>Nutrientes Hidropónicos</h2>
+                
+                <div class="card highlight">
+                    <h3>🧪 Conceptos Básicos</h3>
+                    <p>Las plantas necesitan macronutrientes (NPK) y micronutrientes. En hidroponía, todo debe estar disuelto en el agua en las proporciones correctas.</p>
+                </div>
+                
+                <div class="nutrient-chart">
+                    <div class="nutrient-item">
+                        <h4>Nitrógeno (N)</h4>
+                        <p>150-200 ppm</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <small>Crecimiento de hojas</small>
+                    </div>
+                    
+                    <div class="nutrient-item">
+                        <h4>Fósforo (P)</h4>
+                        <p>30-50 ppm</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                        <small>Desarrollo de raíces</small>
+                    </div>
+                    
+                    <div class="nutrient-item">
+                        <h4>Potasio (K)</h4>
+                        <p>200-300 ppm</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <small>Resistencia y calidad</small>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>📊 Valores Ideales para Lechuga/Rúcula</h3>
+                    <ul>
+                        <li><strong>pH:</strong> 5.5 - 6.5</li>
+                        <li><strong>EC (Conductividad):</strong> 1.2 - 1.6 mS/cm</li>
+                        <li><strong>TDS:</strong> 840 - 1120 ppm</li>
+                        <li><strong>Temperatura agua:</strong> 18-22°C</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>🛒 Soluciones Nutritivas Recomendadas (Argentina)</h3>
+                    <ul>
+                        <li><strong>Nutriponic A + B:</strong> Fácil de usar, completa</li>
+                        <li><strong>Hakaphos:</strong> Económica, buena relación precio-calidad</li>
+                        <li><strong>Master Plant:</strong> Nacional, disponible en grow shops</li>
+                    </ul>
+                </div>
+                
+                <div class="card warning">
+                    <h3>⚠️ Control Semanal</h3>
+                    <p>Medir pH y EC semanalmente. Cambiar solución completa cada 15-20 días.</p>
+                </div>
+            </section>
+            
+            <!-- SUSTRATOS -->
+            <section id="sustratos" class="section">
+                <h2>Sustratos para Hidroponía</h2>
+                
+                <div class="card highlight">
+                    <h3>🌾 Función del Sustrato</h3>
+                    <p>En hidroponía, el sustrato solo sostiene la planta y permite el paso del agua. No aporta nutrientes.</p>
+                </div>
+                
+                <div class="sistema-grid">
+                    <div class="card">
+                        <h3>🥥 Fibra de Coco</h3>
+                        <p><strong>Recomendado para principiantes</strong></p>
+                        <ul>
+                            <li>Retiene humedad</li>
+                            <li>pH neutro</li>
+                            <li>Renovable</li>
+                            <li>Precio: $800-1200/fardo 5kg</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🪨 Leca (Arcilla Expandida)</h3>
+                        <p><strong>Más profesional</strong></p>
+                        <ul>
+                            <li>Reutilizable</li>
+                            <li>Excelente drenaje</li>
+                            <li>pH estable</li>
+                            <li>Precio: $2000-3000/bolsa 50L</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🧽 Lana de Roca</h3>
+                        <p><strong>Uso profesional</strong></p>
+                        <ul>
+                            <li>Germinación perfecta</li>
+                            <li>Control total</li>
+                            <li>Requiere experiencia</li>
+                            <li>Precio: $150-200/cubo</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>📝 Preparación del Sustrato</h3>
+                    <ol>
+                        <li>Lavar el sustrato hasta que salga agua limpia</li>
+                        <li>Ajustar pH si es necesario (fibra de coco a veces viene ácida)</li>
+                        <li>Colocar en contenedores con buenos agujeros de drenaje</li>
+                        <li>Humedecer antes de plantar</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- PROCESO COMPLETO -->
+            <section id="proceso" class="section">
+                <h2>Proceso Completo: De Semilla a Cosecha</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="card highlight">
+                            <h3>🌱 Germinación (Días 1-7)</h3>
+                            <p><strong>Método recomendado:</strong> Germinación en esponja o algodón</p>
+                            <ul>
+                                <li>Usar agua pH 6.0</li>
+                                <li>Temperatura 20-25°C</li>
+                                <li>Lugar oscuro y húmedo</li>
+                                <li>Lechuga: 3-5 días</li>
+                                <li>Rúcula: 2-4 días</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h3>🌿 Trasplante (Días 7-14)</h3>
+                            <p>Cuando aparecen las primeras hojas verdaderas</p>
+                            <ul>
+                                <li>Trasplantar a contenedores con sustrato</li>
+                                <li>Usar solución nutritiva diluida (EC 0.8)</li>
+                                <li>Mantener humedad constante</li>
+                                <li>Proporcionar 12-14 horas de luz</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h3>🚀 Crecimiento Vegetativo (Días 14-25)</h3>
+                            <p>Desarrollo acelerado de hojas</p>
+                            <ul>
+                                <li>Solución nutritiva completa (EC 1.2-1.6)</li>
+                                <li>16 horas de luz diarias</li>
+                                <li>Temperatura 18-24°C</li>
+                                <li>Ventilación constante</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h3>✂️ Cosecha (Días 25-40)</h3>
+                            <p>Momento óptimo de recolección</p>
+                            <ul>
+                                <li><strong>Lechuga:</strong> 30-35 días, hojas firmes</li>
+                                <li><strong>Rúcula:</strong> 25-30 días, antes de floración</li>
+                                <li>Cortar en la mañana temprano</li>
+                                <li>Cosechar planta completa o por hojas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card warning">
+                    <h3>🎯 Indicadores de Problemas</h3>
+                    <ul>
+                        <li><strong>Hojas amarillas:</strong> Exceso de agua o falta de nitrógeno</li>
+                        <li><strong>Crecimiento lento:</strong> pH incorrecto o poca luz</li>
+                        <li><strong>Hojas quemadas:</strong> Concentración muy alta de nutrientes</li>
+                        <li><strong>Raíces marrones:</strong> Falta de oxígeno o temperatura alta</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- PRESUPUESTO -->
+            <section id="presupuesto" class="section">
+                <h2>Presupuesto Detallado (Argentina 2025)</h2>
+                
+                <div class="card highlight">
+                    <h3>💰 Inversión Inicial</h3>
+                    <p>Sistema completo para 30 plantas de lechuga/rúcula</p>
+                </div>
+                
+                <table class="presupuesto-table">
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unit.</th>
+                            <th>Total</th>
+                            <th>Dónde Comprar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tubos PVC 110mm x 6m</td>
+                            <td>2 unidades</td>
+                            <td>$8,500</td>
+                            <td>$17,000</td>
+                            <td>Corralón</td>
+                        </tr>
+                        <tr>
+                            <td>Tanque 150L</td>
+                            <td>1 unidad</td>
+                            <td>$15,000</td>
+                            <td>$15,000</td>
+                            <td>Casa de plásticos</td>
+                        </tr>
+                        <tr>
+                            <td>Bomba de agua 600L/h</td>
+                            <td>1 unidad</td>
+                            <td>$12,000</td>
+                            <td>$12,000</td>
+                            <td>Casa de bombas</td>
+                        </tr>
+                        <tr>
+                            <td>Timer digital</td>
+                            <td>1 unidad</td>
+                            <td>$3,500</td>
+                            <td>$3,500</td>
+                            <td>Ferretería</td>
+                        </tr>
+                        <tr>
+                            <td>Estructura soporte (hierro)</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>$25,000</td>
+                            <td>Herrero local</td>
+                        </tr>
+                        <tr>
+                            <td>Tubería y accesorios</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>$8,000</td>
+                            <td>Corralón</td>
+                        </tr>
+                        <tr>
+                            <td>Contenedores plantas (vasos)</td>
+                            <td>30 unidades</td>
+                            <td>$200</td>
+                            <td>$6,000</td>
+                            <td>Vivero</td>
+                        </tr>
+                        <tr>
+                            <td>Sustrato fibra de coco</td>
+                            <td>2 fardos</td>
+                            <td>$1,000</td>
+                            <td>$2,000</td>
+                            <td>Vivero/Grow shop</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3"><strong>TOTAL SISTEMA</strong></td>
+                            <td><strong>$88,500</strong></td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>🔄 Costos Operativos Mensuales</h3>
+                <table class="presupuesto-table">
+                    <thead>
+                        <tr>
+                            <th>Insumo</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Solución nutritiva A+B</td>
+                            <td>1 kit</td>
+                            <td>$4,500</td>
+                            <td>3 meses</td>
+                        </tr>
+                        <tr>
+                            <td>Semillas lechuga/rúcula</td>
+                            <td>1 sobre c/u</td>
+                            <td>$800</td>
+                            <td>6 cultivos</td>
+                        </tr>
+                        <tr>
+                            <td>Electricidad (bomba + luz)</td>
+                            <td>-</td>
+                            <td>$2,000</td>
+                            <td>1 mes</td>
+                        </tr>
+                        <tr>
+                            <td>pH Down/Up</td>
+                            <td>1 frasco c/u</td>
+                            <td>$1,200</td>
+                            <td>6 meses</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="2"><strong>COSTO MENSUAL PROMEDIO</strong></td>
+                            <td colspan="2"><strong>$3,200</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="card highlight">
+                    <h3>📈 Análisis de Rentabilidad</h3>
+                    <ul>
+                        <li><strong>Producción mensual:</strong> 30 plantas (3-4 kg)</li>
+                        <li><strong>Precio mercado lechuga:</strong> $800-1200/kg</li>
+                        <li><strong>Ingreso mensual estimado:</strong> $3,200-4,800</li>
+                        <li><strong>Ganancia neta:</strong> $0-1,600/mes</li>
+                        <li><strong>Recuperación inversión:</strong> 18-24 meses</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- CONSEJOS -->
+            <section id="consejos" class="section">
+                <h2>Consejos y Solución de Problemas</h2>
+                
+                <div class="card highlight">
+                    <h3>🏆 Consejos para Principiantes</h3>
+                    <ul>
+                        <li><strong>Comenzar simple:</strong> Menos plantas al principio</li>
+                        <li><strong>Llevar registro:</strong> Anotar pH, EC, fechas de siembra</li>
+                        <li><strong>Observar diariamente:</strong> Las plantas comunican sus necesidades</li>
+                        <li><strong>Paciencia:</strong> Los primeros cultivos son de aprendizaje</li>
+                    </ul>
+                </div>
+                
+                <div class="sistema-grid">
+                    <div class="card warning">
+                        <h3>❌ Errores Comunes</h3>
+                        <ul>
+                            <li>No medir pH regularmente</li>
+                            <li>Sobrefertilizar las plantas</li>
+                            <li>Poca ventilación</li>
+                            <li>No cambiar solución nutritiva</li>
+                            <li>Falta de luz adecuada</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>✅ Claves del Éxito</h3>
+                        <ul>
+                            <li>Mantener pH entre 5.5-6.5</li>
+                            <li>Limpieza del sistema</li>
+                            <li>Temperatura estable</li>
+                            <li>Luz 14-16 horas diarias</li>
+                            <li>Oxigenación del agua</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>🔧 Troubleshooting - Problemas y Soluciones</h3>
+                
+                <div class="card">
+                    <h4>🟡 Hojas Amarillas</h4>
+                    <p><strong>Causas:</strong> Deficiencia de nitrógeno, pH incorrecto, exceso de agua</p>
+                    <p><strong>Solución:</strong> Verificar pH (5.5-6.5), ajustar concentración nutritiva, mejorar drenaje</p>
+                </div>
+                
+                <div class="card">
+                    <h4>🔴 Raíces Marrones</h4>
+                    <p><strong>Causas:</strong> Falta de oxígeno, temperatura alta del agua, patógenos</p>
+                    <p><strong>Solución:</strong> Aumentar oxigenación, enfriar agua, limpiar sistema, usar agua oxigenada</p>
+                </div>
+                
+                <div class="card">
+                    <h4>🟢 Crecimiento Lento</h4>
+                    <p><strong>Causas:</strong> Poca luz, pH incorrecto, baja concentración nutritiva</p>
+                    <p><strong>Solución:</strong> Aumentar horas de luz, ajustar pH, incrementar EC gradualmente</p>
+                </div>
+                
+                <div class="card">
+                    <h4>🟤 Puntas Quemadas</h4>
+                    <p><strong>Causas:</strong> Exceso de nutrientes, baja humedad, mucho calor</p>
+                    <p><strong>Solución:</strong> Diluir solución nutritiva, aumentar humedad, mejorar ventilación</p>
+                </div>
+                
+                <div class="card highlight">
+                    <h3>📞 Recursos Adicionales</h3>
+                    <ul>
+                        <li><strong>Foros:</strong> Infojardín (Argentina), grupos Facebook hidroponía</li>
+                        <li><strong>Grow shops:</strong> Distribuidores locales de nutrientes</li>
+                        <li><strong>Apps móviles:</strong> Para monitoreo de pH y EC</li>
+                        <li><strong>Cursos online:</strong> INTA ofrece capacitaciones gratuitas</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>📅 Calendario de Actividades</h3>
+                    <ul>
+                        <li><strong>Diario:</strong> Observar plantas, verificar nivel de agua</li>
+                        <li><strong>Semanal:</strong> Medir pH y EC, ajustar si es necesario</li>
+                        <li><strong>Quincenal:</strong> Cambio completo de solución nutritiva</li>
+                        <li><strong>Mensual:</strong> Limpieza profunda del sistema</li>
+                        <li><strong>Trimestral:</strong> Revisión y mantenimiento de equipos</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar botones de navegación
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Activar el botón correspondiente
+            event.target.classList.add('active');
+            
+            // Scroll suave hacia arriba
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Animación de las barras de progreso al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+        
+        // Efecto hover en las tarjetas
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
